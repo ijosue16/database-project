@@ -33,6 +33,14 @@ WHERE name <> 'Gabumon' ;
 SELECT * FROM animals
 WHERE weight_kg BETWEEN 10.4 AND 17.3;
 
+-- Query to make a transaction to update species column and roll back
+BEGIN;
+UPDATE animals
+SET species='unspecified';
+SELECT * FROM animals;
+ROLLBACK;
+SELECT * FROM animals;
+
 --Query for transaction to set species ->digimon to animals ending in mon and species->pokemon to animals with no species
 BEGIN;
 UPDATE animals
@@ -42,11 +50,13 @@ WHERE name LIKE '%mon';
 UPDATE animals
 SET species ='pokemon'
 WHERE species IS NULL;
+SELECT * FROM animals
 COMMIT;
 
 --Query for transaction to delete all data and rollback
 BEGIN;
 DELETE FROM animals;
+SELECT * FROM animals
 ROLLBACK;
 SELECT * FROM animals;
 
@@ -60,7 +70,7 @@ SET weight_kg = weight_kg * (-1);
 ROLLBACK TO born_before;
 UPDATE animals
 SET weight_kg = weight_kg * (-1)
-WHERE weight_kg < -1;
+WHERE weight_kg < 0;
 SELECT * FROM animals;
 COMMIT;
 
@@ -78,10 +88,10 @@ SELECT AVG (weight_kg)
 FROM animals;
 
 -- Query to find Who escapes the most, neutered or not neutered animals
-SELECT name 
+SELECT max(escape_attempts) as escape_attempts,neutered
 FROM animals
-GROUP BY name
-HAVING  COUNT(escape_attempts )= MAX(escape_attempts);
+WHERE neutered= true or neutered= false
+GROUP BY DISTINCT neutered;
 
 -- Query to find  is the minimum and maximum weight of each type of animal
 SELECT species,MAX(weight_kg) AS maximum_weight,MIN(weight_kg) AS manimum_weight
