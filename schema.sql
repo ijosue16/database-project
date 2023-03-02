@@ -13,3 +13,34 @@ PRIMARY KEY (id));
 --Add a column species of type string to your animals table. Modify your schema.sql file.
 ALTER TABLE animals
 ADD species TEXT;
+
+
+-- Create a table named owners with the following columns
+CREATE TABLE owners(
+id BIGSERIAL PRIMARY KEY NOT NULL,
+full_name VARCHAR(100) NOT NULL,
+age INT NOT NULL
+);
+-- Create a table named species with the following columns
+CREATE TABLE species(
+id BIGSERIAL PRIMARY KEY NOT NULL,
+name VARCHAR(100) NOT NULL
+);
+
+--  qeury to Remove column species
+ALTER TABLE animals
+DROP COLUMN species ;
+SELECT * FROM animals;
+
+-- Modify animals table
+ALTER TABLE animals
+ADD species_id INT;
+ALTER TABLE animals
+ADD CONSTRAINT fk_species_animals
+FOREIGN KEY(species_id) REFERENCES species(id);
+ALTER TABLE animals
+ADD owner_id INT;
+ALTER TABLE animals
+ADD CONSTRAINT fk_owners_animals
+FOREIGN KEY(owner_id) REFERENCES owners(id);
+SELECT * FROM animals;
