@@ -53,3 +53,9 @@ id SERIAL PRIMARY KEY NOT NULL,
 name VARCHAR(100),
 age INT,
 date_of_graduation DATE );
+
+--  Create a "join table" called specializations
+
+CREATE TABLE specializations (
+species_id INT REFERENCES species (id),
+vets_id INT REFERENCES vets (id));
