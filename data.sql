@@ -66,5 +66,8 @@ VALUES(' William Tatcher ',45,'2000-04-23'),
 ('Jack Harkness',38,'2008-06-08');
 
 -- Insert the following data for specialties
+INSERT INTO specializations(vets_id,species_id)
+VALUES(1,1),(3,2),(3,1),(4,2);
+SELECT * FROM specializations;
 
 -- Insert the following data for visits
