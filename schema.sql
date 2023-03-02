@@ -59,3 +59,11 @@ date_of_graduation DATE );
 CREATE TABLE specializations (
 species_id INT REFERENCES species (id),
 vets_id INT REFERENCES vets (id));
+
+
+-- Create a "join table" called visits
+
+CREATE TABLE visits(
+animals_id INT REFERENCES animals (id),
+vets_id INT REFERENCES vets (id),
+visit_date DATE );
