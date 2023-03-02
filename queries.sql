@@ -138,3 +138,8 @@ JOIN owners ON animals.owner_id  = owners.id
 WHERE owners.full_name='Dean Winchester' AND animals.escape_attempts < 1;
 
 --Query to find Who owns the most animals
+SELECT COUNT(animals.owner_id),owners.full_name
+FROM animals
+JOIN owners ON animals.owner_id  = owners.id
+GROUP BY owners.full_name
+HAVING COUNT(animals.owner_id)>2;
