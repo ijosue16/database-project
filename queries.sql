@@ -189,7 +189,23 @@ WHERE vets.name LIKE '%Maisy Smith%'
 ORDER BY visits.visit_date ASC LIMIT 1;
 
 -- Query to find Details for most recent visit: animal information, vet information, and date of visit.
-
+SELECT animals.name,vets.name,visits.visit_date
+FROM animals
+JOIN visits ON animals.id=visits.animals_id
+JOIN vets ON visits.vets_id= vets.id
+ORDER BY visits.visit_date DESC LIMIT 1
 -- Query to find How many visits were with a vet that did not specialize in that animal's species
-
+SELECT COUNT(*)
+FROM vets
+JOIN visits ON visits.vets_id = vets.id
+JOIN specializations ON specializations.vets_id = vets.id
+JOIN animals ON visits.animals_id = animals.id
+WHERE NOT specializations.vets_id = animals.species_id
 -- Query to find What specialty should Maisy Smith consider getting? Look for the species she gets the most.
+SELECT vets.name, COUNT (species.name),species.name FROM vets
+JOIN visits ON visits.vets_id = vets.id 
+JOIN animals ON visits.animals_id = animals.id 
+JOIN species ON animals.species_id = species.id 
+WHERE vets.name LIKE 'Maisy Smith'
+GROUP BY species.name, vets.name 
+ORDER BY COUNT DESC LIMIT 1;
