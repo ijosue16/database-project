@@ -143,3 +143,28 @@ FROM animals
 JOIN owners ON animals.owner_id  = owners.id
 GROUP BY owners.full_name
 HAVING COUNT(animals.owner_id)>2;
+Query to find Who was the last animal seen by William Tatcher
+
+-- Query to find Who was the last animal seen by William Tatcher
+SELECT animals.name,vets.name,visits.visit_date
+FROM animals
+JOIN visits ON animals.id=visits.animals_id
+JOIN vets ON visits.vets_id= vets.id
+WHERE vets.name LIKE '%William Tatcher%'
+ORDER BY visits.visit_date DESC LIMIT 1
+
+-- Query to find How many different animals did Stephanie Mendez see
+
+-- Query to find List all vets and their specialties, including vets with no specialties
+
+-- Query to find List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
+
+-- Query to find What animal has the most visits to vets
+
+-- Query to find Who was Maisy Smith's first visit
+
+-- Query to find Details for most recent visit: animal information, vet information, and date of visit.
+
+-- Query to find How many visits were with a vet that did not specialize in that animal's species
+
+-- Query to find What specialty should Maisy Smith consider getting? Look for the species she gets the most.
