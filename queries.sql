@@ -162,7 +162,10 @@ WHERE vets.name LIKE 'Stephanie Mendez'
 GROUP BY vets.name;
 
 -- Query to find List all vets and their specialties, including vets with no specialties
-
+SELECT vets.name AS vet_name,species.name AS species_name
+FROM vets
+LEFT JOIN specializations ON vets.id = specializations.vets_id
+LEFT JOIN species ON species.id = specializations.species_id
 -- Query to find List all animals that visited Stephanie Mendez between April 1st and August 30th, 2020.
 
 -- Query to find What animal has the most visits to vets
