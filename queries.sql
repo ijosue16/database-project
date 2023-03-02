@@ -154,6 +154,12 @@ WHERE vets.name LIKE '%William Tatcher%'
 ORDER BY visits.visit_date DESC LIMIT 1
 
 -- Query to find How many different animals did Stephanie Mendez see
+SELECT COUNT(animals.name),vets.name
+FROM animals
+JOIN visits ON animals.id=visits.animals_id
+JOIN vets ON visits.vets_id= vets.id
+WHERE vets.name LIKE 'Stephanie Mendez'
+GROUP BY vets.name;
 
 -- Query to find List all vets and their specialties, including vets with no specialties
 
